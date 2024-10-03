@@ -52,3 +52,13 @@ taxes = [
     {"department": "IT Department", "name": "hiring", "value_percents": 6},
     {"department": "BizDev Department", "name": "sales", "value_percents": 20},
 ]
+
+
+def printing(departments):
+    for department in departments:
+        print(department["title"])
+        for employers in department["employers"]:
+            print(employers["first_name"], employers["last_name"])
+
+if __name__ == "__main__":
+    printing(departments)
