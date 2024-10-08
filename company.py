@@ -58,7 +58,56 @@ def printing(departments):
     for department in departments:
         print(department["title"])
         for employers in department["employers"]:
-            print(employers["first_name"], employers["last_name"])
+            print(employers['first_name'], employers['last_name'], department["title"])
+
+
+def get_employer_salary(departments):
+    for department in departments:
+        for employers in department["employers"]:
+            if employers["salary_rub"] > 100000:
+                print(f"Name of employee who has salary 100k: {employers['first_name']} {employers['last_name']}")
+            elif employers["salary_rub"] < 80000:
+                print(f"Position with salary less than 80k:{employers['position']}")
+
+
+def printing_total_salary_expenses(departments):
+    total_expenses = 0
+    for department in departments:
+        for employers in department["employers"]:
+            total_expenses += employers["salary_rub"]
+    print(f"Departments total expenses: {total_expenses}")    
+
+#Второй уровень
+
+def printing_min_max_average_dep(departments):
+    total_salary = 0
+    for department in departments:
+        min_salary = float('inf')
+        max_salary = 0
+        for employers in department["employers"]:
+            if employers["salary_rub"] < min_salary:
+                min_salary = employers["salary_rub"]
+                min_department = department["title"]
+            elif employers["salary_rub"] > max_salary:
+                max_salary = employers["salary_rub"]
+        total_salary += employers["salary_rub"]
+        average_salary = total_salary / len(department["employers"])
+        print(f"{department['title']} has salary min: {min_salary}, average: {average_salary}, max: {max_salary}")
+
+
+def printing_average_salary(departments):
+    total_salary = 0
+    count_employers = 0
+    for department in departments:
+        for employers in department["employers"]:
+            total_salary += employers["salary_rub"]
+            count_employers += 1
+    print(f"average salary: {total_salary/count_employers}")
+            
 
 if __name__ == "__main__":
     printing(departments)
+    get_employer_salary(departments)
+    printing_total_salary_expenses(departments)
+    printing_min_max_average_dep(departments)
+    printing_average_salary(departments)
